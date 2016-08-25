@@ -25,6 +25,8 @@ module.exports = class deco extends Component {
     if (this.state.tip){
       return (
         <View style={styles.container}>
+				<MyButton onPress={() => {this.getTip()}} customText="Get tip of the day" />
+					<Image source={{uri: this.state.tip_image}} style={{width: 300, height: 400}}/>
           <Text>Tip of the day : {this.state.tip} </Text>
         </View>
       )
@@ -43,6 +45,7 @@ module.exports = class deco extends Component {
      .then((response) => response.json())
      .then((responseData) => {
        var modified_image = responseData.image.replace("http","https");
+			 console.log(modified_image);
        var obj = {tip: responseData.info, tip_image: modified_image };
        this.setState(obj);
      })
@@ -62,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff',
+		padding: 10
   },
   welcome: {
     fontSize: 20,
